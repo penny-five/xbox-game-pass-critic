@@ -1,0 +1,138 @@
+.header {
+  position: relative;
+  padding: 35px;
+
+  h1 {
+    font-size: 2.1rem;
+    font-weight: 800rem;
+    color: white;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: -230px;
+    left: 0;
+
+    z-index: -1;
+
+    background: linear-gradient(to right, #bc4e9c, #f80759);
+  }
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 25px 0;
+
+  .fas {
+    margin-right: 6px;
+  }
+
+  .filter-group {
+    margin-right: 10px;
+  }
+
+  .btn {
+    min-width: 70px;
+  }
+}
+
+.games-count {
+  margin: 25px 0;
+  color: white;
+  text-align: right;
+  font-weight: 300;
+
+  > strong {
+    font-weight: 600;
+  }
+}
+
+.games-row {
+  justify-content: stretch;
+  margin-bottom: 100px;
+}
+
+.game-card-wrapper {
+  display: flex;
+  margin-bottom: 25px;
+}
+
+.game-card {
+  width: 100%;
+
+  .game-card-body {
+    display: flex;
+    padding-bottom: 10px;
+  }
+
+  .game-card-image {
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .game-card-content {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .game-card-title {
+    margin-bottom: 0;
+  }
+
+  .game-card-website {
+    color: #212529;
+  }
+
+  .game-card-categories {
+    margin: 4px 0;
+  }
+
+  .game-card-platforms {
+    display: flex;
+    align-items: flex-end;
+    margin: 8px 0 0;
+    flex-grow: 1;
+
+    > .fas {
+      margin-right: 8px;
+    }
+  }
+
+  .game-card-score {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    font-size: 100%;
+
+    &--very-high {
+      background-color: #017305;
+    }
+
+    &--high {
+      background-color: #29a229;
+    }
+
+    &--average {
+      background-color: #f5c83e;
+    }
+
+    &--mixed {
+      background-color: #ff9800;
+    }
+
+    &--bad {
+      background-color: #f00;
+    }
+
+    &--unrated {
+      background-color: #929292;
+    }
+  }
+}

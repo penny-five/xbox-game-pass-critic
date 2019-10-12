@@ -1,0 +1,37 @@
+<div class="card game-card border-0 shadow">
+  <img src="{{pick-card-photo images}}" class="card-img-top border-bottom game-card-image">
+  <div class="card-body game-card-body">
+    <div class="game-card-content">
+      <h6 class="card-title game-card-title">
+        {{#if website}}
+        <a href="http://{{{website}}}" target="_blank" class="game-card-website">{{title}}</a>
+        {{else}}
+        <span>{{title}}</span>
+        {{/if}}
+      </h6>
+      <div class="text-truncate font-weight-light game-card-developer">{{ developer }}</div>
+      <div class="game-card-categories">
+        {{#each categories}}
+        <span class="badge badge-secondary">{{this}}</span>
+        {{/each}}
+      </div>
+      <div class="game-card-platforms">
+        {{#if availableOnPC}}
+        <i class="fas fa-desktop"></i>
+        {{/if}}
+        {{#if availableOnConsole}}
+        <i class="fas fa-hdd"></i>
+        {{/if}}
+      </div>
+    </div>
+    {{#if averageScore}}
+    <span class="badge badge-primary shadow game-card-score game-card-score--{{score-to-rating averageScore}}">
+      {{ floor averageScore }}
+    </span>
+    {{else}}
+    <span class="badge badge-primary shadow game-card-score game-card-score--unrated">
+      N/A
+    </span>
+    {{/if}}
+  </div>
+</div>

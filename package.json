@@ -1,0 +1,36 @@
+{
+  "name": "xbox-game-pass-critic",
+  "version": "1.0.0",
+  "description": "Search interface to XBOX Game Pass games with OpenCritic scores",
+  "author": "penny-five",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@babel/core": "7.6.4",
+    "@babel/preset-env": "7.6.3",
+    "@types/aws-lambda": "8.10.33",
+    "@types/got": "9.6.0",
+    "aws-sdk": "2.548.0",
+    "babel-loader": "8.0.6",
+    "css-loader": "3.2.0",
+    "got": "9.6.0",
+    "handlebars": "4.4.3",
+    "handlebars-loader": "1.7.1",
+    "lodash": "4.17.15",
+    "node-sass": "4.12.0",
+    "pino": "5.13.4",
+    "sass-loader": "8.0.0",
+    "serverless": "1.54.0",
+    "serverless-webpack": "5.3.1",
+    "webpack": "4.41.1",
+    "webpack-node-externals": "1.7.2"
+  },
+  "devDependencies": {
+    "serverless-offline": "5.12.0"
+  },
+  "scripts": {
+    "dev": "serverless offline",
+    "deploy:dev": "serverless deploy --stage dev",
+    "deploy:prod": "serverless deploy --stage prod"
+  }
+}

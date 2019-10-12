@@ -1,0 +1,68 @@
+service: xbox-game-pass-critic
+
+plugins:
+  - serverless-offline
+  - serverless-webpack
+
+package:
+  individually: true
+
+custom:
+  webpack:
+    webpackConfig: "webpack.config.js"
+    packager: "yarn"
+    includeModules:
+      forceExclude:
+        - aws-sdk
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: ${opt:stage, 'dev'}
+  region: eu-west-1
+  environment:
+    GAMES_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:QuerySS
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:BatchWriteItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource:
+        - "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.GAMES_TABLE}"
+
+resources:
+  Resources:
+    GamesTable:
+      Type: "AWS::DynamoDB::Table"
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:provider.environment.GAMES_TABLE}
+
+functions:
+  render:
+    handler: src/handlers/render.default
+    description: Renders the app
+    timeout: 10
+    events:
+      - http:
+          path: app
+          method: get
+          cors: true
+  update-cache:
+    handler: src/handlers/update-cache.default
+    description: Updates the game database
+    timeout: 900
