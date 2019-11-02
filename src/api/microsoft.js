@@ -45,7 +45,7 @@ const consumePaginatedRecoApiEndpoint = async ({ endpointUrl, baseQuery }) => {
     items.push(...result.items);
 
     if (result.numPages > currentPage + 1) {
-      currentPage++;
+      currentPage += 1;
       await sleep(2000);
     } else {
       break;

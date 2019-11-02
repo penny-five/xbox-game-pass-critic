@@ -1,5 +1,3 @@
-import * as _ from 'lodash';
-
 import * as microsoftApi from '../api/microsoft';
 import * as opencriticApi from '../api/opencritic';
 import { sleep } from '../utils';

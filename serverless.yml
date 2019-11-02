@@ -9,8 +9,8 @@ package:
 
 custom:
   webpack:
-    webpackConfig: "webpack.config.js"
-    packager: "yarn"
+    webpackConfig: 'webpack.config.js'
+    packager: 'yarn'
     includeModules:
       forceExclude:
         - aws-sdk
@@ -33,12 +33,12 @@ provider:
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
       Resource:
-        - "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.GAMES_TABLE}"
+        - 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.GAMES_TABLE}'
 
 resources:
   Resources:
     GamesTable:
-      Type: "AWS::DynamoDB::Table"
+      Type: 'AWS::DynamoDB::Table'
       DeletionPolicy: Retain
       Properties:
         AttributeDefinitions:

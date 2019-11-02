@@ -9,7 +9,7 @@ import styles from '../assets/styles.scss';
  * @type {import('aws-lambda').APIGatewayProxyHandler}
  */
 export default async event => {
-  let games = await cache.getAll();
+  const games = await cache.getAll();
 
   const querystring = event.queryStringParameters;
   const sort = (querystring && querystring.sort) || 'score';

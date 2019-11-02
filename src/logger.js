@@ -3,6 +3,7 @@ import * as pino from 'pino';
 const logger = pino();
 
 export const formatEvent = (prefix, type) => `[${prefix.toUpperCase()}] ${type}`;
+
 /**
  * @param {string} prefix
  * @param {string} type

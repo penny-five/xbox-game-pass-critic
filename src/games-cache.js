@@ -6,34 +6,6 @@ import * as logger from './logger';
 const dynamo = new AWS.DynamoDB.DocumentClient();
 
 /**
- * Clears entire cache.
- */
-export const clearAll = async () => {
-  logger.info('cache', 'clearing cache');
-
-  const games = await getGames();
-
-  const chunks = _.chunk(games, 25);
-
-  for (const chunk of chunks) {
-    const params = {
-      RequestItems: {
-        [process.env.GAMES_TABLE]: chunk.map(game => ({
-          DeleteRequest: {
-            Key: {
-              id: game.id
-            }
-          }
-        }))
-      }
-    };
-    await dynamo.batchWrite(params).promise();
-  }
-
-  logger.info('cache', 'cache cleared');
-};
-
-/**
  * Get all cached games.
  */
 export const getAll = async (destArray = [], lastEvaluatedKey) => {
@@ -56,6 +28,34 @@ export const getAll = async (destArray = [], lastEvaluatedKey) => {
 };
 
 /**
+ * Clears entire cache.
+ */
+export const clearAll = async () => {
+  logger.info('cache', 'clearing cache');
+
+  const games = await getAll();
+
+  const chunks = _.chunk(games, 25);
+
+  for (const chunk of chunks) {
+    const params = {
+      RequestItems: {
+        [process.env.GAMES_TABLE]: chunk.map(game => ({
+          DeleteRequest: {
+            Key: {
+              id: game.id
+            }
+          }
+        }))
+      }
+    };
+    await dynamo.batchWrite(params).promise();
+  }
+
+  logger.info('cache', 'cache cleared');
+};
+
+/**
  * Put games to cache.
  *
  * This clears cache of all existing items.
@@ -65,7 +65,7 @@ export const getAll = async (destArray = [], lastEvaluatedKey) => {
 export const replaceAll = async games => {
   logger.info('cache', 'putting games to cache', { count: games.length });
 
-  await clearGames();
+  await clearAll();
 
   const chunks = _.chunk(games, 25);
 

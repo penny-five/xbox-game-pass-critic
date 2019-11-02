@@ -1,9 +1,7 @@
 export default images => {
   if (images.length === 0) return null;
 
-  for (let image of images) {
-    if (image.type === 'Screenshot') return image.url;
-  }
+  const screenshot = images.find(({ type }) => type === 'Screenshot');
 
-  return images[0].url;
+  return screenshot != null ? screenshot.url : images[0].url;
 };

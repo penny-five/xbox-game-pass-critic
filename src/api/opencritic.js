@@ -2,7 +2,6 @@ import got from 'got';
 import * as _ from 'lodash';
 
 import * as logger from '../logger';
-import { sleep } from '../utils';
 
 const OPENCRITIC_API_BASE_URL = 'https://opencritic.com/api';
 
@@ -50,7 +49,7 @@ const fetchGameDetails = async id => {
       topCriticScore: topCriticScore > 0 ? topCriticScore : null,
       percentRecommended: percentRecommended > 0 ? percentRecommended : null,
       numReviews: numReviews > 0 ? numReviews : null,
-      numTopCriticReviews: numTopCriticReviews
+      numTopCriticReviews
     },
     _.negate(_.identity)
   );
