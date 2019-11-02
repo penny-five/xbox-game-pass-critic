@@ -6,7 +6,6 @@ on:
 
 jobs:
   lint:
-    name: Lint
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v1
@@ -17,7 +16,7 @@ jobs:
       - run: yarn lint
 
   deploy-dev:
-    if: github.ref === 'actions'
+    if: github.ref == 'actions'
     needs: lint
     runs-on: ubuntu-18.04
     steps:
@@ -29,7 +28,7 @@ jobs:
       - run: yarn deploy:dev
 
   deploy-prod:
-    if: github.ref === 'master'
+    if: github.ref == 'master'
     needs: lint
     runs-on: ubuntu-18.04
     steps:
