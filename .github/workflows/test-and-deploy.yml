@@ -1,8 +1,5 @@
 name: Test and deploy
-on:
-  push:
-    branches:
-      - actions
+on: push
 
 jobs:
   lint:
@@ -16,7 +13,7 @@ jobs:
       - run: yarn lint
 
   deploy:
-    if: github.ref == 'refs/heads/actions'
+    if: github.ref == 'refs/heads/master'
     needs: lint
     runs-on: ubuntu-18.04
     steps:
