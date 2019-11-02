@@ -15,7 +15,22 @@ jobs:
           node-version: 10.x
       - run: yarn install
       - run: yarn lint
-  deploy:
+
+  deploy-dev:
+    if: github.ref === 'actions'
+    needs: lint
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
+      - run: yarn install
+      - run: yarn deploy:dev
+
+  deploy-prod:
+    if: github.ref === 'master'
+    needs: lint
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v1
