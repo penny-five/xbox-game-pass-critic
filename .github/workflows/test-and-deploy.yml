@@ -16,7 +16,7 @@ jobs:
       - run: yarn lint
 
   deploy-dev:
-    if: github.ref == 'actions'
+    if: github.ref == 'refs/heads/actions'
     needs: lint
     runs-on: ubuntu-18.04
     steps:
@@ -28,7 +28,7 @@ jobs:
       - run: yarn deploy:dev
 
   deploy-prod:
-    if: github.ref == 'master'
+    if: github.ref == 'refs/heads/master'
     needs: lint
     runs-on: ubuntu-18.04
     steps:
