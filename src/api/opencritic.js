@@ -35,7 +35,6 @@ const fetchGameId = async searchphrase => {
  * @param {string} id Opencritic game id
  */
 const fetchGameDetails = async id => {
-  logger.info('opencritic api', 'fetch game', { id });
   const response = await got.get(`game/${id}`, {
     json: true,
     baseUrl: OPENCRITIC_API_BASE_URL
@@ -61,7 +60,7 @@ const fetchGameDetails = async id => {
  * @param {string} title Game title
  * @returns returns `null` if no game is found that matches the title.
  */
-export const getGameInformation = async title => {
+export const fetchGameInformation = async title => {
   logger.info('opencritic api', 'fetch game information', { title });
 
   const gameId = await fetchGameId(title);

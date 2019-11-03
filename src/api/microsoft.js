@@ -140,20 +140,22 @@ export const fetchAllGames = async () => {
 
   const games = [];
 
-  while (gameIds.length > 0) {
-    const ids = gameIds.splice(0, 20);
-
+  for (const ids of _.chunk(gameIds, 20)) {
     logger.info('microsoft api', 'batch fetch game ids', { ids });
 
     const results = await batchFetchGameDetails(ids);
 
-    games.push(
-      ...results.map(game => ({
-        ...game,
-        availableOnConsole: consoleGameIds.includes(game.id),
-        availableOnPC: pcGameIds.includes(game.id)
-      }))
-    );
+    for (const game of results) {
+      const platforms = [];
+      if (consoleGameIds.includes(game.id)) {
+        platforms.push('console');
+      }
+      if (pcGameIds.includes(game.id)) {
+        platforms.push('pc');
+      }
+
+      games.push({ ...game, platforms });
+    }
 
     await sleep(2000);
   }

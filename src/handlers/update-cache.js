@@ -11,7 +11,7 @@ export default async () => {
   const gamesWithScores = [];
 
   for (const game of gamesWithoutScores) {
-    const scores = await opencriticApi.getGameInformation(game.title);
+    const scores = await opencriticApi.fetchGameInformation(game.title);
     gamesWithScores.push({ ...game, ...scores });
     await sleep(300); // Avoid rate-limiting
   }

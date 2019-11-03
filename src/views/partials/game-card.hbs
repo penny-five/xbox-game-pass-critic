@@ -16,12 +16,12 @@
         {{/each}}
       </div>
       <div class="game-card-platforms">
-        {{#if availableOnPC}}
+        {{#if-includes platforms "pc"}}
         <i class="fas fa-desktop"></i>
-        {{/if}}
-        {{#if availableOnConsole}}
+        {{/if-includes}}
+        {{#if-includes platforms "console"}}
         <i class="fas fa-hdd"></i>
-        {{/if}}
+        {{/if-includes}}
       </div>
     </div>
     {{#if averageScore}}
