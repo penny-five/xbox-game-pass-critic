@@ -2,23 +2,34 @@ import * as pino from 'pino';
 
 const logger = pino();
 
-export const formatEvent = (prefix, type) => `[${prefix.toUpperCase()}] ${type}`;
-
 /**
- * @param {string} prefix
- * @param {string} type
+ *
+ * @param {string} tag
+ * @param {string} message
  * @param {any} payload
  */
-export const info = (prefix, type, payload = {}) => logger.info({ event: formatEvent(prefix, type), payload });
+export const formatEvent = (tag, message, payload) => ({
+  tag: tag.toUpperCase(),
+  message,
+  payload
+});
 
 /**
- * @param {string} type
+ * @param {string} tag
+ * @param {string} message
  * @param {any} payload
  */
-export const warn = (prefix, type, payload = {}) => logger.warn({ event: formatEvent(prefix, type), payload });
+export const info = (tag, message, payload = {}) => logger.info(formatEvent(tag, message, payload));
 
 /**
- * @param {string} type
+ * @param {string} tag
+ * @param {string} message
  * @param {any} payload
  */
-export const error = (prefix, type, payload = {}) => logger.error({ event: formatEvent(prefix, type), payload });
+export const warn = (tag, message, payload = {}) => logger.warn(formatEvent(tag, message, payload));
+/**
+ * @param {string} tag
+ * @param {string} message
+ * @param {any} payload
+ */
+export const error = (tag, message, payload = {}) => logger.error(formatEvent(tag, message, payload));
