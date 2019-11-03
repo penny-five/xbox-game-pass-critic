@@ -66,3 +66,6 @@ functions:
     handler: src/handlers/update-cache.default
     description: Updates the game database
     timeout: 900
+    events:
+      - schedule:
+          rate: rate(1 day)
