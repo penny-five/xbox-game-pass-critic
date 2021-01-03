@@ -34,9 +34,9 @@
     "eslint-plugin-node": "10.0.0",
     "eslint-plugin-promise": "4.2.1",
     "eslint-plugin-standard": "4.0.1",
-    "husky": "3.0.9",
-    "lint-staged": "9.4.2",
-    "prettier": "1.18.2",
+    "husky": "4.3.6",
+    "lint-staged": "10.5.3",
+    "prettier": "2.2.1",
     "serverless-offline": "5.12.0"
   },
   "scripts": {
@@ -54,12 +54,10 @@
   "lint-staged": {
     "*.js": [
       "eslint --fix",
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ],
-    "*.{yml,md,css}": [
-      "prettier --write",
-      "git add"
+    "*.{json,yml,md,css}": [
+      "prettier --write"
     ]
   }
 }
