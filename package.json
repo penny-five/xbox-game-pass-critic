@@ -1,47 +1,29 @@
 {
-  "name": "xbox-game-pass-critic",
-  "version": "1.0.0",
-  "description": "Search interface to XBOX Game Pass games with OpenCritic scores",
-  "author": "penny-five",
-  "license": "UNLICENSED",
   "private": true,
-  "dependencies": {
-    "@babel/core": "7.6.4",
-    "@babel/preset-env": "7.6.3",
-    "@types/aws-lambda": "8.10.33",
-    "@types/got": "9.6.0",
-    "aws-sdk": "2.548.0",
-    "babel-loader": "8.0.6",
-    "css-loader": "3.2.0",
-    "got": "9.6.0",
-    "handlebars": "4.4.3",
-    "handlebars-loader": "1.7.1",
-    "lodash": "4.17.19",
-    "node-sass": "4.12.0",
-    "pino": "5.13.4",
-    "sass-loader": "8.0.0",
-    "webpack": "4.41.1",
-    "webpack-node-externals": "1.7.2"
+  "workspaces": {
+    "packages": [
+      "game-pass-critic-infra",
+      "game-pass-critic-sync",
+      "game-pass-critic-ui"
+    ]
   },
   "devDependencies": {
-    "babel-eslint": "10.0.3",
-    "eslint": "6.6.0",
-    "eslint-config-prettier": "6.5.0",
-    "eslint-config-standard": "14.1.0",
-    "eslint-plugin-import": "2.18.2",
-    "eslint-plugin-node": "10.0.0",
+    "@typescript-eslint/parser": "4.11.1",
+    "eslint": "7.17.0",
+    "eslint-config-prettier": "7.1.0",
+    "eslint-config-standard": "16.0.2",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "4.2.1",
-    "eslint-plugin-standard": "4.0.1",
-    "husky": "4.3.6",
-    "lint-staged": "10.5.3",
-    "prettier": "2.2.1"
+    "eslint-plugin-standard": "5.0.0",
+    "husky": "4.3.0",
+    "lint-staged": "10.4.0",
+    "prettier": "2.2.1",
+    "typescript": "4.1.3"
   },
   "scripts": {
-    "prettify": "prettier **/*.{js,yml,md,css} --write",
-    "lint": "eslint '**/*.js'",
-    "dev": "serverless offline",
-    "deploy:dev": "serverless deploy --stage dev",
-    "deploy:prod": "serverless deploy --stage prod"
+    "lint": "eslint **/*.ts",
+    "prettify": "prettier --write **/*.{ts,js,md,json,yml,yaml}"
   },
   "husky": {
     "hooks": {
@@ -49,12 +31,15 @@
     }
   },
   "lint-staged": {
-    "*.js": [
+    "**/*.ts": [
       "eslint --fix",
       "prettier --write"
     ],
-    "*.{json,yml,md,css}": [
+    "**/*.{js,md,json,yml,yaml}": [
       "prettier --write"
+    ],
+    "**/*.tf": [
+      "yarn tf-fmt"
     ]
   }
 }

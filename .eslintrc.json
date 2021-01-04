@@ -1,5 +1,9 @@
 {
+  "root": true,
   "extends": ["standard", "prettier"],
-  "parser": "babel-eslint",
-  "env": { "node": true }
+  "parser": "@typescript-eslint/parser",
+  "rules": {
+    "no-console": "error",
+    "camelcase": "off"
+  }
 }
